@@ -15,44 +15,44 @@ class PluginChronopay extends GatewayPlugin
     	*/
 
         $variables = array (
-                   /*T*/"Plugin Name"/*/T*/ => array (
+                   lang("Plugin Name") => array (
     			   						"type"          =>"hidden",
-    									"description"   =>/*T*/"How CE sees this plugin (not to be confused with the Signup Name)"/*/T*/,
-    									"value"         =>/*T*/"ChronoPay"/*/T*/
+    									"description"   =>lang("How CE sees this plugin (not to be confused with the Signup Name)"),
+    									"value"         =>lang("ChronoPay")
     								   ),
-                   /*T*/"Product ID"/*/T*/ => array (
+                   lang("Product ID") => array (
     			   						"type"          =>"text",
-    									"description"   =>/*T*/"Product ID configured in your ChronoPay Account.<br>NOTE: This ID is required if you have selected ChronoPay as a payment gateway for any of your clients."/*/T*/,
+    									"description"   =>lang("Product ID configured in your ChronoPay Account.<br>NOTE: This ID is required if you have selected ChronoPay as a payment gateway for any of your clients."),
     									"value"         =>""
     								   ),
-                   /*T*/"Product Name"/*/T*/ => array (
+                   lang("Product Name") => array (
     			   						"type"          =>"text",
-    									"description"   =>/*T*/"Product Name to be displayed on the ChronoPay hosted payment page."/*/T*/,
+    									"description"   =>lang("Product Name to be displayed on the ChronoPay hosted payment page."),
     									"value"         =>""
     								   ),
-                   /*T*/"ChronoPay Language"/*/T*/ => array (
+                   lang("ChronoPay Language") => array (
     			   						"type"          =>"text",
-    									"description"   =>/*T*/"Language in which the ChronoPay page will be displayed in. <br/>NL = Dutch, ES = Spanish, <br/>RU = Russian, EN = English (Default)"/*/T*/,
+    									"description"   =>lang("Language in which the ChronoPay page will be displayed in. <br/>NL = Dutch, ES = Spanish, <br/>RU = Russian, EN = English (Default)"),
     									"value"         =>"EN"
     								   ),
-                   /*T*/"Invoice After Signup"/*/T*/ => array (
+                   lang("Invoice After Signup") => array (
                                         "type"          =>"yesno",
-                                        "description"   =>/*T*/"Select YES if you want an invoice sent to the customer after signup is complete."/*/T*/,
+                                        "description"   =>lang("Select YES if you want an invoice sent to the customer after signup is complete."),
                                         "value"         =>"1"
                                        ),
-                   /*T*/"Signup Name"/*/T*/ => array (
+                   lang("Signup Name") => array (
     			   						"type"          =>"text",
-    									"description"   =>/*T*/"Select the name to display in the signup process for this payment type. Example: ChronoPay or Credit Card."/*/T*/,
+    									"description"   =>lang("Select the name to display in the signup process for this payment type. Example: ChronoPay or Credit Card."),
     									"value"         =>"Credit Card"
     								   ),
-                   /*T*/"Dummy Plugin"/*/T*/ => array (
+                   lang("Dummy Plugin") => array (
     			   						"type"          =>"hidden",
-    									"description"   =>/*T*/"1 = Only used to specify a billing type for a customer. 0 = full fledged plugin requiring complete functions"/*/T*/,
+    									"description"   =>lang("1 = Only used to specify a billing type for a customer. 0 = full fledged plugin requiring complete functions"),
     									"value"         =>"0"
     								   ),
-                   /*T*/"Check CVV2"/*/T*/ => array (
+                   lang("Check CVV2") => array (
                                         "type"          =>"hidden",
-                                        "description"   =>/*T*/"Select YES if you want to accept CVV2 for this plugin."/*/T*/,
+                                        "description"   =>lang("Select YES if you want to accept CVV2 for this plugin."),
                                         "value"         =>"0"
                                        )
         );
