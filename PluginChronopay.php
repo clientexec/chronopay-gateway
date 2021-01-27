@@ -8,71 +8,74 @@ class PluginChronopay extends GatewayPlugin
 {
     function getVariables()
     {
-    	/* Specification
-    		  itemkey     - used to identify variable in your other functions
-    		  type 		  - text,textarea,yesno,password
-    		  description - description of the variable, displayed in ClientExec
-    	*/
+        /* Specification
+              itemkey     - used to identify variable in your other functions
+              type        - text,textarea,yesno,password
+              description - description of the variable, displayed in ClientExec
+        */
 
         $variables = array (
                    lang("Plugin Name") => array (
-    			   						"type"          =>"hidden",
-    									"description"   =>lang("How CE sees this plugin (not to be confused with the Signup Name)"),
-    									"value"         =>lang("ChronoPay")
-    								   ),
+                                        "type"          =>"hidden",
+                                        "description"   =>lang("How CE sees this plugin (not to be confused with the Signup Name)"),
+                                        "value"         =>lang("ChronoPay")
+                                       ),
                    lang("Product ID") => array (
-    			   						"type"          =>"text",
-    									"description"   =>lang("Product ID configured in your ChronoPay Account.<br>NOTE: This ID is required if you have selected ChronoPay as a payment gateway for any of your clients."),
-    									"value"         =>""
-    								   ),
+                                        "type"          =>"text",
+                                        "description"   =>lang("Product ID configured in your ChronoPay Account.<br>NOTE: This ID is required if you have selected ChronoPay as a payment gateway for any of your clients."),
+                                        "value"         =>""
+                                       ),
                    lang("Product Name") => array (
-    			   						"type"          =>"text",
-    									"description"   =>lang("Product Name to be displayed on the ChronoPay hosted payment page."),
-    									"value"         =>""
-    								   ),
+                                        "type"          =>"text",
+                                        "description"   =>lang("Product Name to be displayed on the ChronoPay hosted payment page."),
+                                        "value"         =>""
+                                       ),
                    lang("ChronoPay Language") => array (
-    			   						"type"          =>"text",
-    									"description"   =>lang("Language in which the ChronoPay page will be displayed in. <br/>NL = Dutch, ES = Spanish, <br/>RU = Russian, EN = English (Default)"),
-    									"value"         =>"EN"
-    								   ),
+                                        "type"          =>"text",
+                                        "description"   =>lang("Language in which the ChronoPay page will be displayed in. <br/>NL = Dutch, ES = Spanish, <br/>RU = Russian, EN = English (Default)"),
+                                        "value"         =>"EN"
+                                       ),
                    lang("Invoice After Signup") => array (
                                         "type"          =>"yesno",
-                                        "description"   =>lang("Select YES if you want an invoice sent to the customer after signup is complete."),
+                                        "description"   =>lang("Select YES if you want an invoice sent to the client after signup is complete."),
                                         "value"         =>"1"
                                        ),
                    lang("Signup Name") => array (
-    			   						"type"          =>"text",
-    									"description"   =>lang("Select the name to display in the signup process for this payment type. Example: ChronoPay or Credit Card."),
-    									"value"         =>"Credit Card"
-    								   ),
+                                        "type"          =>"text",
+                                        "description"   =>lang("Select the name to display in the signup process for this payment type. Example: ChronoPay or Credit Card."),
+                                        "value"         =>"Credit Card"
+                                       ),
                    lang("Dummy Plugin") => array (
-    			   						"type"          =>"hidden",
-    									"description"   =>lang("1 = Only used to specify a billing type for a customer. 0 = full fledged plugin requiring complete functions"),
-    									"value"         =>"0"
-    								   ),
+                                        "type"          =>"hidden",
+                                        "description"   =>lang("1 = Only used to specify a billing type for a client. 0 = full fledged plugin requiring complete functions"),
+                                        "value"         =>"0"
+                                       ),
                    lang("Check CVV2") => array (
                                         "type"          =>"hidden",
                                         "description"   =>lang("Select YES if you want to accept CVV2 for this plugin."),
                                         "value"         =>"0"
                                        )
         );
-    	return $variables;
+        return $variables;
     }
 
     function credit($params)
-    {}
+    {
+    }
 
     function singlepayment($params)
     {
-    	//Function needs to build the url to the payment processor, then redirect
-    	//Plugin variables can be accesses via $params["plugin_[pluginname]_[variable]"] (ex. $params["plugin_2checkout_SellerID"])
+        //Function needs to build the url to the payment processor, then redirect
+        //Plugin variables can be accesses via $params["plugin_[pluginname]_[variable]"] (ex. $params["plugin_2checkout_SellerID"])
 
-    	$return_url = mb_substr($params['clientExecURL'],-1,1) == "//" ? $params['clientExecURL']."plugins/gateways/chronopay/callback.php?ipn=1" : $params['clientExecURL']."/plugins/gateways/chronopay/callback.php?ipn=1";
+        $return_url = mb_substr($params['clientExecURL'], -1, 1) == "//" ? $params['clientExecURL']."plugins/gateways/chronopay/callback.php?ipn=1" : $params['clientExecURL']."/plugins/gateways/chronopay/callback.php?ipn=1";
 
-    	$postURL = "https://secure.chronopay.com/index_shop.cgi";
+        $postURL = "https://secure.chronopay.com/index_shop.cgi";
 
 
-    	if ($params["userCountry"]=="US") $params["userCountry"]="USA";
+        if ($params["userCountry"]=="US") {
+            $params["userCountry"]="USA";
+        }
 
         //generate post to submit to chronopay
         $strRet = "<html>\n";
@@ -102,11 +105,10 @@ class PluginChronopay extends GatewayPlugin
         $strRet .= "<script language=\"JavaScript\">\n";
         $strRet .= "document.forms[0].submit();\n";
         $strRet .= "</script>\n";
-    //	$strRet .= "<input type=\"submit\" name=\"go\" value=\"Go to ChronoPay\" />\n";
+    //  $strRet .= "<input type=\"submit\" name=\"go\" value=\"Go to ChronoPay\" />\n";
         $strRet .= "</form>\n";
         $strRet .= "</body></html>";
         echo $strRet;
-     	exit;
-     }
+        exit;
+    }
 }
-?>
